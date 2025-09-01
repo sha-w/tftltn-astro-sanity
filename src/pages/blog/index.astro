@@ -66,14 +66,20 @@ const allPosts = await getBlogPosts();
                     </div>
                     
                     <div class="articles-grid" id="articles-grid">
-                        {allPosts.map((post) => (
-                            <article class="article-card" data-category={post.category.toLowerCase()}>
+                        {allPosts.map((post) => {
+                            const category = (post as any).category || (post.categories?.[0]?.title) || 'General';
+                            const tags = (post as any).tags || [];
+                            const authorRole = (post.author as any)?.role || 'Author';
+                            const authorName = post.author?.name || 'Anonymous';
+                            
+                            return (
+                            <article class="article-card" data-category={category.toLowerCase()}>
                                 <div class="card-image">
                                     <div class="image-placeholder">
                                         <span class="placeholder-icon">📖</span>
                                     </div>
                                     <div class="card-overlay">
-                                        <span class="card-category">{post.category}</span>
+                                        <span class="card-category">{category}</span>
                                     </div>
                                 </div>
                                 <div class="card-content">
@@ -84,26 +90,29 @@ const allPosts = await getBlogPosts();
                                     <h3 class="card-title">
                                         <a href={`/blog/${post.slug.current}`}>{post.title}</a>
                                     </h3>
-                                    <p class="card-excerpt">{post.excerpt}</p>
+                                    <p class="card-excerpt">{post.excerpt || 'Read this article to learn more...'}</p>
                                     <div class="card-footer">
                                         <div class="author-info">
                                             <div class="author-avatar">
-                                                <span class="avatar-initial">{post.author.name[0]}</span>
+                                                <span class="avatar-initial">{authorName[0]}</span>
                                             </div>
                                             <div class="author-details">
-                                                <span class="author-name">{post.author.name}</span>
-                                                <span class="author-role">{post.author.role}</span>
+                                                <span class="author-name">{authorName}</span>
+                                                <span class="author-role">{authorRole}</span>
                                             </div>
                                         </div>
                                         <div class="article-tags">
-                                            {post.tags.slice(0, 2).map((tag: string) => (
+                                            {tags.length > 0 ? tags.slice(0, 2).map((tag: string) => (
                                                 <span class="tag">#{tag}</span>
+                                            )) : post.categories?.slice(0, 2).map((cat: any) => (
+                                                <span class="tag">#{cat.title || cat}</span>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
                             </article>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
 
