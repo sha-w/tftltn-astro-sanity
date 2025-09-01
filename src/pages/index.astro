@@ -1,16 +1,238 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import '../styles/original.css';
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The First The Last The Nerdom - Your ultimate destination for nerdy content, reviews, and discussions">
+    <meta name="keywords" content="nerdom, geek culture, reviews, YouTube, ML, Tom">
+    <title>The First The Last The Nerdom</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1 class="logo-text">TFTLTN</h1>
+                <span class="logo-subtitle">The First The Last The Nerdom</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#videos" class="nav-link">Latest Videos</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="/blog/" class="nav-link">Blog</a>
+                <a href="#newsletter" class="nav-link coming-soon">Newsletter</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-particles"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-first">The First</span>
+                <span class="hero-last">The Last</span>
+                <span class="hero-nerdom">The Nerdom</span>
+            </h1>
+            <p class="hero-subtitle">Your ultimate destination for nerdy content, epic reviews, and passionate discussions</p>
+            <div class="hero-buttons">
+                <a href="https://www.youtube.com/@firstlastnerdom" target="_blank" class="btn btn-primary">
+                    <span class="btn-icon">📺</span>
+                    Watch on YouTube
+                </a>
+                <a href="#videos" class="btn btn-secondary">
+                    <span class="btn-icon">🎦</span>
+                    Latest Videos
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Latest Videos Section -->
+    <section class="videos-section" id="videos">
+        <div class="container">
+            <h2 class="section-title">Latest Videos</h2>
+            <p class="section-subtitle">Check out our newest nerdy discussions and reviews</p>
+            <div class="videos-grid" id="videos-grid">
+                <!-- Videos will be dynamically loaded here -->
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading latest videos...</p>
+                </div>
+            </div>
+            
+            <div class="videos-error" id="videos-error" style="display: none;">
+                <p>Unable to load videos. Please check back later or visit our <a href="https://www.youtube.com/@firstlastnerdom" target="_blank">YouTube channel</a> directly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Meet The Nerds</h2>
+            <p class="section-subtitle">The minds behind the madness</p>
+            
+            <div class="hosts-grid">
+                <div class="host-card">
+                    <div class="host-image">
+                        <img src="images/tom.jpeg" alt="Tom" class="host-photo">
+                        <div class="host-overlay">
+                            <div class="host-social">
+                                <a href="#" class="social-link" aria-label="Tom's Twitter">🐦</a>
+                                <a href="#" class="social-link" aria-label="Tom's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="host-info">
+                        <h3 class="host-name">Tom</h3>
+                        <p class="host-role">Co-Host & Chief Nerd Officer</p>
+                        <p class="host-bio">
+                            Hello, I am Thomas McAlister and have been a life long nerd. My first anime that I loved was Speed Racer. The first movie I truly loved was Star Wars. My love of comic books started early on and my favorites were X-Men and Spider-Man. I loved to read and my first fantasy novel I read was Sword of Shanara by Terry Brooks. Tom is also working on getting an Army of the Dead together.
+                        </p>
+                        <div class="host-links">
+                            <a href="https://x.com/firstlastnerdom" target="_blank" class="host-link">🐦 @firstlastnerdom</a>
+                            <a href="https://www.reddit.com/user/FirstLastNerdom/" target="_blank" class="host-link">🔗 Reddit</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="host-card">
+                    <div class="host-image">
+                        <img src="images/ml.jpeg" alt="ML" class="host-photo">
+                        <div class="host-overlay">
+                            <div class="host-social">
+                                <a href="#" class="social-link" aria-label="ML's Twitter">🐦</a>
+                                <a href="#" class="social-link" aria-label="ML's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="host-info">
+                        <h3 class="host-name">ML</h3>
+                        <p class="host-role">Co-Host & Nerd Extraordinaire</p>
+                        <p class="host-bio">
+                            Hi, I am Mike. Like Tom, I have been a life long nerd since the time my dad and I watched the first episode of ST:TNG. My love of Star Trek grew from there, and I also fell in love with Star Wars, comic books, and reading fantasy novels. I love all things nerdy and geeky, and I'm always ready to discuss the latest in sci-fi, fantasy, and pop culture.
+                        </p>
+                        <div class="host-links">
+                            <a href="https://x.com/firstlastnerdom" target="_blank" class="host-link">🐦 @firstlastnerdom</a>
+                            <a href="https://www.reddit.com/user/FirstLastNerdom/" target="_blank" class="host-link">🔗 Reddit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="section-title">Stay In The Loop</h2>
+                <p class="coming-soon-text">📬 Our weekly nerdy newsletter is coming soon!</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3 class="logo-text">TFTLTN</h3>
+                    <p class="logo-subtitle">The First The Last The Nerdom</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Content</h4>
+                        <a href="#videos">Latest Videos</a>
+                        <a href="blog/">Blog Posts</a>
+                        <a href="#about">About Us</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://www.youtube.com/@firstlastnerdom" target="_blank">YouTube</a>
+                        <a href="mailto:contact@firstlastnerdom.com">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The First The Last The Nerdom. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@firstlastnerdom" target="_blank" aria-label="YouTube">
+                        <span class="social-icon">▶</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
 </html>

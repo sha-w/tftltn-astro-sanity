@@ -1,0 +1,238 @@
+---
+import '../../styles/original.css';
+import '../../styles/blog.css';
+import { getBlogPosts } from '../../lib/sanity';
+
+const allPosts = await getBlogPosts();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The First The Last The Nerdom Blog - Deep dives into nerdy content, reviews, and discussions">
+    <meta name="keywords" content="nerdom, blog, articles, geek culture, reviews, gaming, sci-fi, fantasy">
+    <title>Blog - The First The Last The Nerdom</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1 class="logo-text">TFTLTN</h1>
+                <span class="logo-subtitle">The First The Last The Nerdom</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="../" class="nav-link">Home</a>
+                <a href="../#videos" class="nav-link">Latest Videos</a>
+                <a href="../#about" class="nav-link">About Us</a>
+                <a href="./" class="nav-link active">Blog</a>
+                <a href="#newsletter" class="nav-link coming-soon">Newsletter</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <h1 class="section-title">The Nerd Chronicles</h1>
+            <p class="section-subtitle">Deep dives, hot takes, and passionate discussions about all things nerdy</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="blog-main">
+        <div class="container">
+            <div class="blog-layout">
+                <!-- Articles Section -->
+                <section class="articles-section">
+                    <div class="articles-header">
+                        <h2 class="articles-title">Latest Articles</h2>
+                        <div class="articles-filter">
+                            <button class="filter-btn active" data-category="all">All</button>
+                            <button class="filter-btn" data-category="reviews">Reviews</button>
+                            <button class="filter-btn" data-category="analysis">Analysis</button>
+                            <button class="filter-btn" data-category="news">News</button>
+                        </div>
+                    </div>
+                    
+                    <div class="articles-grid" id="articles-grid">
+                        {allPosts.map((post) => (
+                            <article class="article-card" data-category={post.category.toLowerCase()}>
+                                <div class="card-image">
+                                    <div class="image-placeholder">
+                                        <span class="placeholder-icon">📖</span>
+                                    </div>
+                                    <div class="card-overlay">
+                                        <span class="card-category">{post.category}</span>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-meta">
+                                        <span class="card-date">{new Date(post.publishedAt).toLocaleDateString()}</span>
+                                        <span class="read-time">5 min read</span>
+                                    </div>
+                                    <h3 class="card-title">
+                                        <a href={`/blog/${post.slug.current}`}>{post.title}</a>
+                                    </h3>
+                                    <p class="card-excerpt">{post.excerpt}</p>
+                                    <div class="card-footer">
+                                        <div class="author-info">
+                                            <div class="author-avatar">
+                                                <span class="avatar-initial">{post.author.name[0]}</span>
+                                            </div>
+                                            <div class="author-details">
+                                                <span class="author-name">{post.author.name}</span>
+                                                <span class="author-role">{post.author.role}</span>
+                                            </div>
+                                        </div>
+                                        <div class="article-tags">
+                                            {post.tags.slice(0, 2).map((tag: string) => (
+                                                <span class="tag">#{tag}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="blog-sidebar">
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Categories</h3>
+                        <div class="category-list">
+                            <a href="#" class="category-item">
+                                <span class="category-name">Reviews</span>
+                                <span class="category-count">12</span>
+                            </a>
+                            <a href="#" class="category-item">
+                                <span class="category-name">Analysis</span>
+                                <span class="category-count">8</span>
+                            </a>
+                            <a href="#" class="category-item">
+                                <span class="category-name">News</span>
+                                <span class="category-count">5</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Popular Tags</h3>
+                        <div class="tag-cloud">
+                            <a href="#" class="tag-item">anime</a>
+                            <a href="#" class="tag-item">gaming</a>
+                            <a href="#" class="tag-item">sci-fi</a>
+                            <a href="#" class="tag-item">comics</a>
+                            <a href="#" class="tag-item">star-wars</a>
+                            <a href="#" class="tag-item">marvel</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="section-title">Stay In The Loop</h2>
+                <p class="coming-soon-text">📬 Our weekly nerdy newsletter is coming soon!</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>TFTLTN</h3>
+                    <p>The First The Last The Nerdom</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Content</h4>
+                        <a href="../#videos">Latest Videos</a>
+                        <a href="../#about">About Us</a>
+                        <a href="./">Blog</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://www.youtube.com/@firstlastnerdom" target="_blank">YouTube</a>
+                        <a href="#newsletter">Newsletter (Coming Soon)</a>
+                        <a href="#" target="_blank">Discord</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The First The Last The Nerdom. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@firstlastnerdom" target="_blank" aria-label="YouTube">
+                        <span class="social-icon">▶</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Category Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const articles = document.querySelectorAll('.article-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const category = this.getAttribute('data-category');
+                
+                articles.forEach(article => {
+                    if (category === 'all' || article.getAttribute('data-category') === category) {
+                        article.style.display = 'block';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
